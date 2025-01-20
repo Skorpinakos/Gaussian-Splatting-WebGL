@@ -34,25 +34,20 @@ const settings = {
 }
 
 const defaultCameraParameters = {
-    'room': {
-        up: [0, 0.886994, 0.461779],
-        target: [-0.428322434425354, 1.2004123210906982, 0.8184626698493958],
-        camera: [4.950796326794864, 1.7307963267948987, 2.5],
-        defaultCameraMode: 'freefly',
-        size: '270mb'
-    },
-    'building': {
-        up: [0, 0.968912, 0.247403],
-        target: [-0.262075, 0.76138, 1.27392],
-        camera: [ -1.1807959999999995, 1.8300000000000007, 3.99],
+    
+    'bodegas_750k_splats': {
+        up: [0, 1, 0],
+        target: [+0.8,-2.2,-0.0],
+        camera: [ 6.8, 1.5, 4.5],
         defaultCameraMode: 'orbit',
-        size: '326mb'
+        size: '181Mb'
     },
-    'garden': {
-        up: [0.055540, 0.928368, 0.367486],
-        target: [0.338164, 1.198655, 0.455374],
+    'bodegas_4500k_splats': {
+        up: [0, 1, 0],
+        target: [+0.8,-2.2,-0.0],
+        camera: [ 6.8, 1.5, 4.5],
         defaultCameraMode: 'orbit',
-        size: '1.07gb [!]'
+        size: '1.1Gb'
     }
 }
 
@@ -113,6 +108,8 @@ async function main() {
 
 // Load a .ply scene specified as a name (URL fetch) or local file
 async function loadScene({scene, file}) {
+    const host = window.location.origin; // E.g., "http://example.com:3000"
+    console.log('Host URL:', host);
     gl.clearColor(0, 0, 0, 0)
     gl.clear(gl.COLOR_BUFFER_BIT)
     if (cam) cam.disableMovement = true
@@ -123,7 +120,7 @@ async function loadScene({scene, file}) {
     // Create a StreamableReader from a URL Response object
     if (scene != null) {
         scene = scene.split('(')[0].trim()
-        const url = `https://huggingface.co/kishimisu/3d-gaussian-splatting-webgl/resolve/main/${scene}.ply`
+        const url = host+`/gsplats/${scene}.ply`
         const response = await fetch(url)
         contentLength = parseInt(response.headers.get('content-length'))
         reader = response.body.getReader()
