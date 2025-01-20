@@ -48,6 +48,13 @@ const defaultCameraParameters = {
         camera: [ 6.8, 1.5, 4.5],
         defaultCameraMode: 'orbit',
         size: '1.1Gb'
+    },
+    'gounari_pantanasis_rf_3000k_splats': {
+        up: [0, 1, 0],
+        target: [+0.8,-2.2,-0.0],
+        camera: [ 6.8, 1.5, 4.5],
+        defaultCameraMode: 'orbit',
+        size: '0.7Gb'
     }
 }
 
